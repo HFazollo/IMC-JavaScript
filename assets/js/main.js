@@ -7,7 +7,7 @@ function criaP() {
     return p;
 }
 
-// Exibe resultado
+// Formação do resultado
 function setResultado(msg, isValid) {
     const resultado = document.querySelector('#resultado');
     resultado.innerHTML = '';
@@ -22,7 +22,7 @@ function setResultado(msg, isValid) {
     }
 }
 
-// Captura evento de submit
+// Captura evento de submit e exibe resultado
 form.addEventListener('submit', function(event) {
     event.preventDefault();
     const inputAltura = event.target.querySelector('#altura');
@@ -30,12 +30,17 @@ form.addEventListener('submit', function(event) {
     const altura = Number(inputAltura.value);
     const peso = Number(inputPeso.value);
 
+    if(!peso && !altura) {
+        setResultado('Peso e altura inválidos!', false);
+        return;
+    }
+
     if(!peso) {
         setResultado('Peso inválido!', false);
         return;
     }
 
-    if(!altura) {
+    if(!altura || Number.isInteger(altura) == true) {
         setResultado('Altura inválida', false);
         return;
     }
