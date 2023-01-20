@@ -27,7 +27,7 @@ form.addEventListener('submit', function(event) {
     event.preventDefault();
     const inputAltura = event.target.querySelector('#altura');
     const inputPeso = event.target.querySelector('#peso');
-    const altura = Number(inputAltura.value);
+    let altura = Number(inputAltura.value);
     const peso = Number(inputPeso.value);
 
     if(!peso && !altura) {
@@ -40,9 +40,13 @@ form.addEventListener('submit', function(event) {
         return;
     }
 
-    if(!altura || Number.isInteger(altura) == true) {
+    if(!altura) {
         setResultado('Altura inválida', false);
         return;
+    }
+
+    if(Number.isInteger(altura) == true) {
+        altura /= 100;
     }
 
     const imc = peso / (altura ** 2);
